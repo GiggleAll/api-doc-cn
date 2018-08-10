@@ -78,7 +78,7 @@ class Demo {
 		}
 		$paramsStr = implode('&', $tempArr);
 		$httpUrl = "{$this->httpSchemas}://{$this->bcApiHost}{$this->bcApiPath}?{$paramsStr}";
-		$httpResStr = Common::httpCurl($httpUrl);
+		$httpResStr = $this->httpCurl($httpUrl);
 		return json_decode($httpResStr, true);
 	}
 
