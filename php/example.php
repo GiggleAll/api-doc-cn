@@ -146,7 +146,6 @@ class Demo {
 		$this->apiType = 'GET';
 		//验证参数
 		$params = $this->commonParams;
-		$params['symbol'] = "ETH/USDT";
 
 		//创建签名
 		$sign = $this->genSign($params);
