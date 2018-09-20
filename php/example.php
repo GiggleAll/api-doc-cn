@@ -163,7 +163,7 @@ class Demo {
 	}
 
 
-	private function httpCurl($url,$postdata=[], $proxy=['proxyHost','proxyPort']) {
+	private function httpCurl($url,$postdata=[], $proxy=[]) {
 		$ch = curl_init();
 		curl_setopt($ch,CURLOPT_URL, $url);
 		if ( !empty($postdata) ) {
