@@ -20,7 +20,6 @@ TradeUrl = "https://open-api.becent.com"
 def http_get_request(url, params, add_to_headers=None):
     headers = {
         "Content-type": "application/json",
-        'cache-control': "no-cache",
         'User-Agent': 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
     }
     if add_to_headers:
@@ -46,10 +45,7 @@ def http_post_request(url, params, add_to_headers=None):
     }
     if add_to_headers:
         headers.update(add_to_headers)
-    postdata = ''
-    for k,v in params.items():
-        postdata += k + '=' + str(v) + '&'
-    postdata.rstrip('&')
+    postdata = urllib.parse.urlencode(params).encode("utf-8")
     response = requests.post(url, postdata, headers=headers, timeout=10)
     try:
 
@@ -97,7 +93,6 @@ def api_key_post(params, request_path):
     Signature = createSign(params, method, host_name, request_path, SecretKey)
     params['Signature'] = Signature
     url = host_url + request_path
-    # url = host_url + request_path + '?' + urllib.parse.urlencode(params_to_sign)
     return http_post_request(url, params)
 
 
